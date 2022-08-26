@@ -1,0 +1,10 @@
+.Rectangle {
+    width: 34.375rem;
+    height: 5.625rem;
+    margin: 2.375rem 9.375rem 1.875rem 2.5rem;
+    padding: 0 0 0 1.625rem;
+    opacity: 0.8;
+    border-radius: 6px;
+    border: solid 1px #979797;
+    background-color: #fff;
+}
