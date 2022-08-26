@@ -5,7 +5,7 @@ const TabsComponent: React.FC = () => {
 
     return (
         <div className="Tabs">
-
+            Este es el tab
         </div>
     )
 }
