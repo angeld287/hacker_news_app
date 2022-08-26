@@ -19,4 +19,17 @@ describe('HackNews Unit Tests', () => {
     expect(component.asFragment()).toMatchSnapshot();
   })
 
+  test('It must display a header title "HACKER NEWS"', () => {
+    expect(component.getByText(/HACKER NEWS/i)).toBeInTheDocument();
+  });
+
+  test('It must display a the two tabs "All" and "My faves"', () => {
+    expect(component.getByText(/All/i)).toBeInTheDocument();
+    expect(component.getByText(/My faves/i)).toBeInTheDocument();
+  });
+
+  test('It must display a select component for choose types of news', () => {
+    expect(component.getByText(/Select your news/i)).toBeInTheDocument();
+  });
+
 });
