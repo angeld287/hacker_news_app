@@ -6,16 +6,16 @@ import Locals from "../utils/locals";
 class searchByDateService implements ISearchByDateService {
     private url: string = Locals.config().searchByDateEndPoint;
 
-    async searchByDate(url: string): Promise<IResponse> {
+    async searchByDate(query: string, page: string): Promise<IResponse> {
         try {
-            const pageSpurceFetch = await fetcher(this.url + '/api/getPageSource', {
+            const fetchResult = await fetcher(`${this.url}query=${query}&page=${page}`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             });
-            return await pageSpurceFetch;
+            return await fetchResult;
         } catch (error) {
             let errorResult: IResponse = {
                 hits: null
