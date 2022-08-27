@@ -9,7 +9,7 @@ import useNews from './useNews';
 
 const News: React.FC<INews> = ({ type }) => {
 
-    const { options, search } = useNews();
+    const { options, search, onChangePagination } = useNews();
 
     return (
         <div>
@@ -26,7 +26,7 @@ const News: React.FC<INews> = ({ type }) => {
                 }
             </div>
             <div className="pagination">
-                <PaginationComponent />
+                <PaginationComponent onChange={onChangePagination} itemsCount={!search.results.hits ? 0 : search.results.hits.length} />
             </div>
         </div>
     )

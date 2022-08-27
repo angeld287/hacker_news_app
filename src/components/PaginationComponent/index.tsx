@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { IPagination } from '../../interfaces/components/IPagination';
 
-const PaginationComponent: React.FC = () => {
+const PaginationComponent: React.FC<IPagination> = ({ itemsCount, onChange }) => {
 
     return (
         <Stack spacing={2}>
-            <Pagination count={10} variant="outlined" shape="rounded" />
+            <Pagination onChange={onChange} count={itemsCount} color="primary" variant="outlined" shape="rounded" />
         </Stack>
     );
 }

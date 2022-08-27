@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
 import { selectSearch } from "../../features/finder/searchSlice";
@@ -11,6 +11,11 @@ const useNews = () => {
     const onSearch = useCallback((query: string, page: string) => {
         dispatch(searchAsync({ query, page }))
     }, [dispatch]);
+
+    const onChangePagination = useCallback((event: ChangeEvent<unknown>, page: number) => {
+        console.log(event, page);
+
+    }, [])
 
     useEffect(() => {
         if (!search.results.hits) {
@@ -26,7 +31,7 @@ const useNews = () => {
         ]), []
     )
 
-    return { options, search };
+    return { options, search, onChangePagination };
 }
 
 export default useNews
