@@ -4,6 +4,7 @@ import { searchAsync } from "../../features/finder/asyncThunks";
 import { selectSearch } from "../../features/finder/searchSlice";
 import { ISelectOptions, Options } from "../../interfaces/components/ISelect";
 import IHit from "../../interfaces/models/IHit";
+import { getIndexFromSelectedPage, getRangeFromArray } from "../../utils/tools";
 
 const useNews = () => {
     const [current8, setCurrent8] = useState<Array<IHit>>([]);
@@ -25,22 +26,12 @@ const useNews = () => {
             const index: number = getIndexFromSelectedPage(selectedPage, 8)
             setCurrent8(getRangeFromArray(search.results.hits, index, index + 7))
         }
-        console.log(search);
 
     }, [onSearch, search, selectedPage])
 
     const onChangePagination = useCallback((event: ChangeEvent<unknown>, page: number) => {
-        console.log(event, page);
         setSelectedPage(page)
     }, [setSelectedPage])
-
-    const getRangeFromArray = (array: Array<any>, start: number, end: number): Array<any> => {
-        return array.slice(start, end)
-    }
-
-    const getIndexFromSelectedPage = (selectedPage: number, quantity: number): number => {
-        return 1 + quantity * (selectedPage - 1);
-    }
 
     const options: Array<ISelectOptions> = useMemo(
         () => ([

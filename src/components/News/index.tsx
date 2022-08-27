@@ -28,7 +28,7 @@ const News: React.FC<INews> = ({ type }) => {
                     </div>
                     <div className="column-right">
                         {search.results.hits && (
-                            current8.slice(3, 8).map(hit => (
+                            current8.slice(4, 8).map(hit => (
                                 <div key={`key-${hit.objectID}`}>
                                     <NewsComponent {...hit} />
                                 </div>
