@@ -4,10 +4,7 @@
     align-items: center;
 }
 
-.btn-inactive {
-    background-color: #ffffff;
-    border: 1px solid #1797ff;
-    color: #606060;
+.btn-group button {
     padding: 10px 24px;
     cursor: pointer;
     float: left;
@@ -19,14 +16,20 @@
     line-height: 1.75;
     letter-spacing: normal;
     text-align: center;
+    background-color: #ffffff;
+
+}
+
+.btn-active {
+    border: 2px solid #1797ff;
+}
+
+.btn-inactive {
+    border: 2px solid #d6d6d6;
 }
 
 .btn-group button:not(:last-child) {
     border-right: none;
-}
-
-.btn-group button {
-    border: solid 1px #d6d6d6;
 }
 
 .btn-group button:first-child {
@@ -44,5 +47,5 @@
 }
 
 .btn-group button:hover {
-    background-color: #1797ff;
+    border: 2px solid #1797ff;
 }
