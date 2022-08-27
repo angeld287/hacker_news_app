@@ -12,7 +12,8 @@ class searchByDateService implements ISearchByDateService {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'mode': 'no-cors',
                 }
             });
             return await fetchResult;

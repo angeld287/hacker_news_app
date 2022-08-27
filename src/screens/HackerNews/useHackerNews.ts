@@ -19,12 +19,14 @@ const useHackerNews = () => {
             {
                 component: {
                     type: TabType.ALL
-                }, isActive: activeTab === TabType.ALL
+                }, isActive: activeTab === TabType.ALL,
+                key: "key-all"
             },
             {
                 component: {
                     type: TabType.FAVORITE
-                }, isActive: activeTab === TabType.FAVORITE
+                }, isActive: activeTab === TabType.FAVORITE,
+                key: "key-fav"
             }
         ]
     }), [activeTab]);

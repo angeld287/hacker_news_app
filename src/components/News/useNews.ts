@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo } from "react";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
+import { selectSearch } from "../../features/finder/searchSlice";
 import { ISelectOptions, Options } from "../../interfaces/components/ISelect";
 
 const useNews = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+    const search = useAppSelector(selectSearch);
 
     const onSearch = useCallback((query: string, page: string) => {
         dispatch(searchAsync({ query, page }))
@@ -14,6 +16,8 @@ const useNews = () => {
         onSearch(Options.ANGULAR, "0")
     }, [onSearch])
 
+    useEffect(() => console.log(search), [search])
+
     const options: Array<ISelectOptions> = useMemo(
         () => ([
             { text: "Angular", value: Options.ANGULAR },
@@ -22,7 +26,7 @@ const useNews = () => {
         ]), []
     )
 
-    return { options };
+    return { options, search };
 }
 
 export default useNews

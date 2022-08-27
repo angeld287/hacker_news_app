@@ -12,6 +12,7 @@ export interface ITabBody {
 export interface IChildrenComponent {
     component: INews;
     isActive: boolean;
+    key: string;
 }
 
 export enum TabType {

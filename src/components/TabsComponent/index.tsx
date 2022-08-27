@@ -18,7 +18,7 @@ const TabBody: React.FC<ITabBody> = React.memo(({ components }) => {
     return (
         <div className="tab-body">
             {components.map(child => (
-                <div className={child.isActive ? 'active-tab' : 'inactive-tab'}>
+                <div key={child.key} className={child.isActive ? 'active-tab' : 'inactive-tab'}>
                     <News {...child.component} />
                 </div>
             ))}
