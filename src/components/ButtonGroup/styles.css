@@ -1,0 +1,30 @@
+.btn-group button {
+    background-color: #ffffff;
+    border: 1px solid #1797ff;
+    color: #606060;
+    padding: 10px 24px;
+    cursor: pointer;
+    float: left;
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    text-align: center;
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none;
+}
+
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn-group button:hover {
+    background-color: #1797ff;
+}

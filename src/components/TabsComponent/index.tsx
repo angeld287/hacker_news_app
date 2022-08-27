@@ -1,11 +1,12 @@
 import React from 'react';
+import Button from '../ButtonGroup';
 import './styles.css';
 
 const TabsComponent: React.FC = () => {
 
     return (
         <div className="Tabs">
-            Este es el tab
+            <Button />
         </div>
     )
 }
