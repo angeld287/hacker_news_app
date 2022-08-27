@@ -1,23 +1,31 @@
 import { useMemo, useState } from "react";
 import { IButtonGroup } from "../../interfaces/components/IButtonGroup";
-import { ITabBody } from "../../interfaces/components/ITab";
+import { ITabBody, TabType } from "../../interfaces/components/ITab";
 
 const useHackerNews = () => {
-    const [activeTab, setActiveTab] = useState("all")
+    const [activeTab, setActiveTab] = useState(1)
 
     const tabButtons: IButtonGroup = useMemo(() => (
         {
             buttons: [
-                { text: "All", action: () => setActiveTab("all"), isActive: activeTab === "all" },
-                { text: "My faves", action: () => setActiveTab("favs"), isActive: activeTab === "favs" },
+                { text: "All", action: () => setActiveTab(1), isActive: activeTab === TabType.ALL },
+                { text: "My faves", action: () => setActiveTab(0), isActive: activeTab === TabType.FAVORITE },
             ]
         }
     ), [activeTab]);
 
     const tabBody: ITabBody = useMemo(() => ({
         components: [
-            { component: "Todos", isActive: activeTab === "all" },
-            { component: "Favoritos", isActive: activeTab === "favs" }
+            {
+                component: {
+                    type: TabType.ALL
+                }, isActive: activeTab === TabType.ALL
+            },
+            {
+                component: {
+                    type: TabType.FAVORITE
+                }, isActive: activeTab === TabType.FAVORITE
+            }
         ]
     }), [activeTab]);
 

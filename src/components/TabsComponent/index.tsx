@@ -1,6 +1,7 @@
 import React from 'react';
 import { ITab, ITabBody } from '../../interfaces/components/ITab';
 import TabsButtons from '../ButtonGroup';
+import News from '../News';
 import './styles.css';
 
 const TabsComponent: React.FC<ITab> = ({ tabBody, tabButtons }) => {
@@ -18,7 +19,7 @@ const TabBody: React.FC<ITabBody> = React.memo(({ components }) => {
         <div className="tab-body">
             {components.map(child => (
                 <div className={child.isActive ? 'active-tab' : 'inactive-tab'}>
-                    {child.component}
+                    <News {...child.component} />
                 </div>
             ))}
         </div>

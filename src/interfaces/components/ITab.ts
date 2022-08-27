@@ -1,4 +1,5 @@
 import { IButtonGroup } from "./IButtonGroup";
+import { INews } from "./INews";
 
 export interface ITab {
     tabBody: ITabBody;
@@ -9,6 +10,11 @@ export interface ITabBody {
 }
 
 export interface IChildrenComponent {
-    component: string;
+    component: INews;
     isActive: boolean;
+}
+
+export enum TabType {
+    FAVORITE = 0,
+    ALL = 1
 }
