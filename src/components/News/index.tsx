@@ -1,23 +1,24 @@
 import React from 'react';
 import { INews } from '../../interfaces/components/INews';
-import { ISelectOptions } from '../../interfaces/components/ISelect';
 import { TabType } from '../../interfaces/components/ITab';
 import SelectComponent from '../SelectComponent';
 import './styles.css';
+import useNews from './useNews';
 
 const News: React.FC<INews> = ({ type }) => {
 
-    const _options: Array<ISelectOptions> = [
-        { text: "Angular", value: "angular" },
-        { text: "React", value: "react" },
-        { text: "Vuejs", value: "vuejs" },
-    ]
+    const { options } = useNews();
 
     return (
         <div>
-            {type === TabType.ALL && <SelectComponent placeholder='Select your news' options={_options} />}
+            <div>
+                {type === TabType.ALL && <SelectComponent placeholder='Select your news' options={options} />}
+            </div>
+            <div>
+
+            </div>
         </div>
     )
 }
 
-export default News
+export default React.memo(News);
