@@ -5,7 +5,7 @@ const SelectComponent: React.FC = () => {
 
     return (
         <div className="Select">
-
+            selct Component
         </div>
     )
 }
