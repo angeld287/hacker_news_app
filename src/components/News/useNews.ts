@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
 import { selectSearch } from "../../features/finder/searchSlice";
@@ -13,10 +13,10 @@ const useNews = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        onSearch(Options.ANGULAR, "0")
-    }, [onSearch])
-
-    useEffect(() => console.log(search), [search])
+        if (!search.results.hits) {
+            onSearch(Options.ANGULAR, "0")
+        }
+    }, [onSearch, search])
 
     const options: Array<ISelectOptions> = useMemo(
         () => ([
