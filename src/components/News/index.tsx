@@ -8,8 +8,7 @@ import './styles.css';
 import useNews from './useNews';
 
 const News: React.FC<INews> = ({ type }) => {
-
-    const { options, search, onChangePagination } = useNews();
+    const { options, search, onChangePagination, current8 } = useNews();
 
     return (
         <div>
@@ -18,7 +17,7 @@ const News: React.FC<INews> = ({ type }) => {
             </div>
             <div>
                 {
-                    search.results.hits && search.results.hits.map(hit => (
+                    search.results.hits && current8.map(hit => (
                         <div key={hit.objectID}>
                             <NewsComponent {...hit} />
                         </div>
@@ -26,7 +25,7 @@ const News: React.FC<INews> = ({ type }) => {
                 }
             </div>
             <div className="pagination">
-                <PaginationComponent onChange={onChangePagination} itemsCount={!search.results.hits ? 0 : search.results.hits.length} />
+                <PaginationComponent onChange={onChangePagination} itemsCount={!search.results.hits ? 0 : Math.ceil(search.results.hits.length / 8)} />
             </div>
         </div>
     )
