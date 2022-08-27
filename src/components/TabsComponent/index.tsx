@@ -1,24 +1,14 @@
-import React, { useMemo } from 'react';
-import { IButton } from '../../interfaces/components/IButtonGroup';
-import { IChildrenComponent, ITabBody } from '../../interfaces/components/ITab';
+import React from 'react';
+import { ITab, ITabBody } from '../../interfaces/components/ITab';
 import TabsButtons from '../ButtonGroup';
 import './styles.css';
 
-const TabsComponent: React.FC = () => {
-    const buttons: Array<IButton> = useMemo(() => [
-        { text: "All", action: () => { }, isActive: true },
-        { text: "My faves", action: () => { }, isActive: false },
-    ], []);
-
-    const bodies: Array<IChildrenComponent> = useMemo(() => [
-        { component: "Todos", isActive: true },
-        { component: "Favoritos", isActive: false }
-    ], []);
+const TabsComponent: React.FC<ITab> = ({ tabBody, tabButtons }) => {
 
     return (
         <div className="tab-container">
-            <TabsButtons buttons={buttons} />
-            <TabBody components={bodies} />
+            <TabsButtons buttons={tabButtons.buttons} />
+            <TabBody components={tabBody.components} />
         </div>
     )
 }

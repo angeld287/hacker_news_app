@@ -1,3 +1,9 @@
+import { IButtonGroup } from "./IButtonGroup";
+
+export interface ITab {
+    tabBody: ITabBody;
+    tabButtons: IButtonGroup;
+}
 export interface ITabBody {
     components: Array<IChildrenComponent>;
 }

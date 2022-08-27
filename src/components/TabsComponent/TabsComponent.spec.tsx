@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { render, RenderResult, act } from '../../utils/test-utils';
 import TabsComponent from './index';

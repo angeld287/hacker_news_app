@@ -22,5 +22,13 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/**/*.*.tsx",
+    "src/**/*.*.ts",
+    "src/components/**/*.spec.tsx",
+    "src/**/*Handlers.ts",
+    "src/utils/test-utils",
+    "src/utils/test-handlers-utils",
   ]
 }
