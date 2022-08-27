@@ -1,26 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Tabs from '../../components/TabsComponent';
-import { IButtonGroup } from '../../interfaces/components/IButtonGroup';
-import { ITabBody } from '../../interfaces/components/ITab';
 import './styles.css';
+import useHackerNews from './useHackerNews';
 
 const HackerNews: React.FC = () => {
-
-    const _tbody: ITabBody = useMemo(() => ({
-        components: [
-            { component: "Todos", isActive: true },
-            { component: "Favoritos", isActive: false }
-        ]
-    }), []);
-
-    const _tbutton: IButtonGroup = useMemo(() => (
-        {
-            buttons: [
-                { text: "All", action: () => { }, isActive: true },
-                { text: "My faves", action: () => { }, isActive: false },
-            ]
-        }
-    ), []);
+    const { tabButtons, tabBody } = useHackerNews();
 
     return (
         <div className="container">
@@ -30,7 +14,7 @@ const HackerNews: React.FC = () => {
                 </span>
             </div>
             <div className="body">
-                <Tabs tabBody={_tbody} tabButtons={_tbutton} />
+                <Tabs tabBody={tabBody} tabButtons={tabButtons} />
             </div>
         </div>
     )
