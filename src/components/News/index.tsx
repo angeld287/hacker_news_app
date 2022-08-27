@@ -16,13 +16,26 @@ const News: React.FC<INews> = ({ type }) => {
                 {type === TabType.ALL && <SelectComponent placeholder='Select your news' options={options} />}
             </div>
             <div>
-                {
-                    search.results.hits && current8.map(hit => (
-                        <div key={hit.objectID}>
-                            <NewsComponent {...hit} />
-                        </div>
-                    ))
-                }
+                <div className="row">
+                    <div className="column-left">
+                        {search.results.hits && (
+                            current8.slice(0, 4).map(hit => (
+                                <div key={`key-${hit.objectID}`}>
+                                    <NewsComponent {...hit} />
+                                </div>
+                            ))
+                        )}
+                    </div>
+                    <div className="column-right">
+                        {search.results.hits && (
+                            current8.slice(3, 8).map(hit => (
+                                <div key={`key-${hit.objectID}`}>
+                                    <NewsComponent {...hit} />
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
             </div>
             <div className="pagination">
                 <PaginationComponent onChange={onChangePagination} itemsCount={!search.results.hits ? 0 : Math.ceil(search.results.hits.length / 8)} />
