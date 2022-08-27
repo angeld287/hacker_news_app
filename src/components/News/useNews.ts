@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
 import { selectSearch } from "../../features/finder/searchSlice";
