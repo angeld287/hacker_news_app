@@ -5,7 +5,7 @@ import "./styles.css"
 const Button: React.FC<IButtonGroup> = ({ buttons }) => {
     return (
         <div className="btn-group">
-            {buttons.map(btn => <button onClick={btn.action} >{btn.text}</button>)}
+            {buttons.map(btn => <button className={btn.isActive ? 'btn-active' : 'btn-inactive'} onClick={btn.action} >{btn.text}</button>)}
         </div>
     )
 }

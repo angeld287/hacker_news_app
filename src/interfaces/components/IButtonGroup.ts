@@ -7,4 +7,5 @@ export interface IButtonGroup {
 export interface IButton {
     text: string;
     action: MouseEventHandler<HTMLButtonElement>;
+    isActive: boolean;
 }

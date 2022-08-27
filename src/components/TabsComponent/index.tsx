@@ -5,8 +5,8 @@ import './styles.css';
 
 const TabsComponent: React.FC = () => {
     const buttons: Array<IButton> = [
-        { text: "All", action: () => { } },
-        { text: "My faves", action: () => { } },
+        { text: "All", action: () => { }, isActive: true },
+        { text: "My faves", action: () => { }, isActive: false },
     ]
     return (
         <div className="tab-container">

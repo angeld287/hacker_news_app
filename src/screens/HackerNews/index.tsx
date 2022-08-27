@@ -5,9 +5,9 @@ import './styles.css';
 const HackerNews: React.FC = () => {
 
     return (
-        <div className="Front-End-Test---Home-view">
+        <div className="container">
             <div className="header">
-                <span className="HACKER-NEWS">
+                <span>
                     HACKER NEWS
                 </span>
             </div>

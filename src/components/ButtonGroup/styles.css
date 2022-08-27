@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-.btn-group button {
+.btn-inactive {
     background-color: #ffffff;
     border: 1px solid #1797ff;
     color: #606060;
