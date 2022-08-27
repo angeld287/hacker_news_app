@@ -5,11 +5,12 @@
 }
 
 .btn-group button {
-    padding: 10px 24px;
+    width: 98px;
+    height: 31px;
     cursor: pointer;
     float: left;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.2rem;
+    font-size: 16px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
@@ -17,15 +18,16 @@
     letter-spacing: normal;
     text-align: center;
     background-color: #ffffff;
+    color: var(--brownish-grey);
 
 }
 
 .btn-active {
-    border: 2px solid #1797ff;
+    border: 1px solid #1797ff;
 }
 
 .btn-inactive {
-    border: 2px solid #d6d6d6;
+    border: 1px solid #d6d6d6;
 }
 
 .btn-group button:not(:last-child) {
@@ -33,11 +35,11 @@
 }
 
 .btn-group button:first-child {
-    border-radius: 10px 0 0 10px;
+    border-radius: 2px 0 0 2px;
 }
 
 .btn-group button:last-child {
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 2px 2px 0;
 }
 
 .btn-group:after {
