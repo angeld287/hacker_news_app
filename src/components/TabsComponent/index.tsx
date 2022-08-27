@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from '../ButtonGroup';
+import TabsButtons from '../ButtonGroup';
 import './styles.css';
 
 const TabsComponent: React.FC = () => {
 
     return (
-        <div className="Tabs">
-            <Button />
+        <div className="tab-container">
+            <TabsButtons />
         </div>
     )
 }

@@ -1,3 +1,9 @@
+.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn-group button {
     background-color: #ffffff;
     border: 1px solid #1797ff;
@@ -17,6 +23,14 @@
 
 .btn-group button:not(:last-child) {
     border-right: none;
+}
+
+.btn-group button:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.btn-group button:last-child {
+    border-radius: 0 10px 10px 0;
 }
 
 .btn-group:after {

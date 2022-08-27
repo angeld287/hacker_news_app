@@ -6,6 +6,8 @@ const Button: React.FC = () => {
         <div className="btn-group">
             <button>Apple</button>
             <button>Samsung</button>
+            <button>Samsung</button>
+            <button>Samsung</button>
             <button>Sony</button>
         </div>
     )
