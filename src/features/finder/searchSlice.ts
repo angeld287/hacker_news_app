@@ -75,9 +75,13 @@ export const searchSlice = createSlice({
           return hit
         }) : []
 
-        state.records.push(state.currentSearchProps)
-        state.results.hits = [...prev, ...next]
-        state.currentSearchProps = initialState.currentSearchProps;
+        const currentPage = state.apiCurrentPage.find(page => page.type === state.newsType)
+        if (prev.filter(hit => hit.query === currentPage?.type && hit.page === currentPage?.page.toString()).length === 0) {
+          state.records.push(state.currentSearchProps)
+          state.results.hits = [...prev, ...next]
+          state.currentSearchProps = initialState.currentSearchProps;
+        }
+
         state.status = 'idle';
       })
       .addCase(searchAsync.rejected, (state) => {

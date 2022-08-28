@@ -66,7 +66,7 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
             const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)
             //console.log('query: ', e.target.value);
             //console.log('page: ', currentPage);
-            const hitsByPageAndQuery = search.results.hits?.filter(hit => hit.query === e.target.value && hit.page == currentPage?.page);
+            const hitsByPageAndQuery = search.results.hits?.filter(hit => hit.query === e.target.value && parseInt(hit.page ? hit.page : "0") === currentPage?.page);
             //console.log('hitsByPageAndQuery: ', hitsByPageAndQuery);
 
             if (currentPage && hitsByPageAndQuery && hitsByPageAndQuery.length === 0) {
@@ -82,7 +82,7 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
                 if (localSService.addFave(hit))
                     dispatch(addLocalHit(hit))
         }
-    }, [search.results.hits, localSService])
+    }, [search.results.hits, localSService, dispatch])
 
     const removeNewsFromFaves = useCallback((objectId: string) => {
         if (search.results.hits) {
@@ -91,7 +91,7 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
                 if (localSService.removeFave(hit))
                     dispatch(removeLocalHit(hit))
         }
-    }, [search.results.hits, localSService])
+    }, [search.results.hits, localSService, dispatch])
 
     return { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves };
 }

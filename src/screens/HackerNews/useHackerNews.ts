@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
 import { selectSearch, setLocalHits, setNewsType } from "../../features/finder/searchSlice";
 import { IButtonGroup } from "../../interfaces/components/IButtonGroup";
-import { Options } from "../../interfaces/components/ISelect";
 import { ITabBody, TabType } from "../../interfaces/components/ITab";
 import IHit from "../../interfaces/models/IHit";
 import ILocalStoreService from "../../interfaces/services/ILocalStoreService";
@@ -41,7 +40,7 @@ const useHackerNews = () => {
         const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)
         if (currentPage && currentPage.page !== 0 && search.newsType)
             dispatch(searchAsync({ query: search.newsType as string, page: currentPage.page.toString() }))
-    }, [search.apiCurrentPage, dispatch])
+    }, [search.apiCurrentPage, dispatch, search.newsType])
 
     useEffect(() => {
         if (search.results.hits) {
