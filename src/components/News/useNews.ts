@@ -8,7 +8,6 @@ import IHit from "../../interfaces/models/IHit";
 import ILocalStoreService from "../../interfaces/services/ILocalStoreService";
 import localStoreService from "../../services/localStoreService";
 import { getIndexFromSelectedPage, getRangeFromArray } from "../../utils/tools";
-//import { SelectChangeEvent } from '@mui/material/Select';
 
 const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
     const [current8Items, setCurrent8Items] = useState<Array<IHit>>([]);
@@ -59,9 +58,8 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
         ]), []
     )
 
-    const onChangeSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    const onChangeSelect = useCallback((value: string) => {
         if (type === TabType.ALL) {
-            const value = e.target.value;
             localSService.updateNewsType(value as Options)
             dispatch(setNewsType(value as Options))
             const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)

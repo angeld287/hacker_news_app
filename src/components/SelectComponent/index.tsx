@@ -16,6 +16,7 @@ const SelectComponent: React.FC<ISelect> = ({ placeholder, options, onChange }) 
 
     const handleChange = (event: SelectChangeEvent) => {
         setValue(event.target.value);
+        onChange(event.target.value);
     };
 
     if (!search.newsType)

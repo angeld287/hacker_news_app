@@ -1,9 +1,7 @@
-import { ChangeEventHandler } from "react";
-
 export interface ISelect {
     placeholder: string;
     options: Array<ISelectOptions>;
-    onChange: ChangeEventHandler<HTMLSelectElement>;
+    onChange: (value: string) => void;
     defaultValue?: string | number | readonly string[] | undefined;
 }
 
