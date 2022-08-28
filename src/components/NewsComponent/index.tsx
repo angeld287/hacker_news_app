@@ -7,10 +7,12 @@ const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url
 
     return (
         <div className="news-component">
-            <div className="news-column body">
+            <div className="news-column column-body">
                 <div className="time-row">
                     <div className="clock-icon">
-                        <img src="src/assets/iconmonstr-time-2.png" className="iconmonstr-time-2" />
+                        <div className="clock-icon">
+                            <img alt="" src="https://github.com/angeld287/hacker_news_app/blob/master/src/assets/iconmonstr-time-2.png?raw=true" className="iconmonstr-time-2" />
+                        </div>
                     </div>
                     <div className="time-description">{created_at} {author}</div>
                 </div>
