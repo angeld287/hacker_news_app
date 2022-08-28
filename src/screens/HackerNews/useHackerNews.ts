@@ -38,8 +38,9 @@ const useHackerNews = () => {
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(searchAsync({ query: Options.ANGULAR, page: search.apiCurrentPage.toString() }))
-    }, [search.apiCurrentPage, dispatch])
+        if (search.apiCurrentPage !== 0)
+            dispatch(searchAsync({ query: Options.ANGULAR, page: search.apiCurrentPage.toString() }))
+    }, [search.apiCurrentPage])
 
     useEffect(() => {
         if (search.results.hits) {
