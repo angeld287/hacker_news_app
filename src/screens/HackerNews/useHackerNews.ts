@@ -33,8 +33,9 @@ const useHackerNews = () => {
     }, [dispatch, localSService])
 
     useEffect(() => {
-        if (search.apiCurrentPage !== 0 && search.newsType)
-            dispatch(searchAsync({ query: search.newsType as string, page: search.apiCurrentPage.toString() }))
+        const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)
+        if (currentPage && currentPage.page !== 0 && search.newsType)
+            dispatch(searchAsync({ query: search.newsType as string, page: currentPage.page.toString() }))
     }, [search.apiCurrentPage, dispatch])
 
     useEffect(() => {

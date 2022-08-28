@@ -27,7 +27,12 @@ const useNews = (hits: Array<IHit> | undefined) => {
     const onChangePagination = useCallback((event: ChangeEvent<unknown>, page: number) => {
         const lastButton: number = hits ? Math.ceil(hits.length / 8) : 0
         if (page === lastButton) {
-            dispatch(setApiCurrentPage(search.apiCurrentPage + 1))
+            const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)
+            if (currentPage) {
+                dispatch(setApiCurrentPage({ page: currentPage.page + 1, type: currentPage.type }))
+            } else {
+                dispatch(setApiCurrentPage({ page: 1, type: search.newsType }))
+            }
         }
         setSelectedPage(page)
     }, [dispatch, setSelectedPage, hits, search.apiCurrentPage])

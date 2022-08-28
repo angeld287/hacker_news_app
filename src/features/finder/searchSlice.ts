@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Options } from '../../interfaces/components/ISelect';
 import { searchAsync } from './asyncThunks';
-import { ISearchRecord, ISearchSlice } from './ISearch';
+import { ICurrentPage, ISearchRecord, ISearchSlice } from './ISearch';
 
 export const initialState: ISearchSlice = {
   status: 'idle',
@@ -12,7 +12,7 @@ export const initialState: ISearchSlice = {
   },
   records: [],
   currentSearchProps: { page: '0', type: Options.ANGULAR },
-  apiCurrentPage: 0,
+  apiCurrentPage: [],
   newsType: null
 };
 
@@ -25,8 +25,15 @@ export const searchSlice = createSlice({
     setCurrentSearchProps: (state, action: PayloadAction<ISearchRecord>) => {
       state.currentSearchProps = { page: action.payload.page, type: action.payload.type };
     },
-    setApiCurrentPage: (state, action: PayloadAction<number>) => {
-      state.apiCurrentPage = action.payload;
+    setApiCurrentPage: (state, action: PayloadAction<ICurrentPage>) => {
+      const pages = state.apiCurrentPage
+      const currentPage = pages.find(page => page.type === action.payload.type)
+      if (currentPage) {
+        currentPage.page = action.payload.page
+      } else {
+        pages.push(action.payload)
+      }
+      state.apiCurrentPage = pages;
     },
     setNewsType: (state, action: PayloadAction<Options>) => {
       state.newsType = action.payload

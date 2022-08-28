@@ -11,11 +11,16 @@ export interface ISearchSlice {
     results: IResponse;
     records: Array<ISearchRecord>
     currentSearchProps: ISearchRecord
-    apiCurrentPage: number,
+    apiCurrentPage: Array<ICurrentPage>,
     newsType: Options | null
 }
 
 export interface ISearchRecord {
     type: Options.ANGULAR | Options.REACT | Options.VUE;
     page: string;
+}
+
+export interface ICurrentPage {
+    page: number;
+    type: Options | null;
 }
