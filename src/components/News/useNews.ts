@@ -8,7 +8,7 @@ import IHit from "../../interfaces/models/IHit";
 import ILocalStoreService from "../../interfaces/services/ILocalStoreService";
 import localStoreService from "../../services/localStoreService";
 import { getIndexFromSelectedPage, getRangeFromArray } from "../../utils/tools";
-import { SelectChangeEvent } from '@mui/material/Select';
+//import { SelectChangeEvent } from '@mui/material/Select';
 
 const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
     const [current8Items, setCurrent8Items] = useState<Array<IHit>>([]);

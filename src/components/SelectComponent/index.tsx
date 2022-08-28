@@ -24,18 +24,18 @@ const SelectComponent: React.FC<ISelect> = ({ placeholder, options, onChange }) 
     return (
         <div className="select-body">
             <FormControl sx={{ m: 1, minWidth: 240 }} size="small">
-                <InputLabel id="demo-select-small">Age</InputLabel>
+                <InputLabel id="demo-simple-select-label">{placeholder}</InputLabel>
 
                 <Select
-                    placeholder="Select your news"
                     value={value}
                     onChange={handleChange}
+                    label={placeholder}
                     displayEmpty
                     inputProps={{ 'aria-label': 'Without label' }}
                 >
                     {
                         options.map(option => (
-                            <MenuItem value={option.value}><img className="option-asset" alt="" src={option.image} />{option.text}</MenuItem>
+                            <MenuItem key={`key-${option.value}`} value={option.value}><img className="option-asset" alt="" src={option.image} />{option.text}</MenuItem>
                         ))
                     }
                 </Select>
