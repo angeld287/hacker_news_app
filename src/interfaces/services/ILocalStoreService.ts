@@ -8,5 +8,7 @@ export default interface ILocalStoreService {
 
     removeFave(hit: IHit): boolean
 
+    getNewsType(): Options | null
+
     updateNewsType(type: Options): boolean
 }
