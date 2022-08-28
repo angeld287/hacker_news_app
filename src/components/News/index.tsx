@@ -7,8 +7,8 @@ import SelectComponent from '../SelectComponent';
 import './styles.css';
 import useNews from './useNews';
 
-const News: React.FC<INews> = ({ type }) => {
-    const { options, search, onChangePagination, current8 } = useNews();
+const News: React.FC<INews> = ({ type, hits }) => {
+    const { options, onChangePagination, current8Items } = useNews(hits);
 
     return (
         <div>
@@ -18,8 +18,8 @@ const News: React.FC<INews> = ({ type }) => {
             <div>
                 <div className="row">
                     <div className="column-left">
-                        {search.results.hits && (
-                            current8.slice(0, 4).map(hit => (
+                        {hits && (
+                            current8Items.slice(0, 4).map(hit => (
                                 <div key={`key-${hit.objectID}`}>
                                     <NewsComponent {...hit} />
                                 </div>
@@ -27,8 +27,8 @@ const News: React.FC<INews> = ({ type }) => {
                         )}
                     </div>
                     <div className="column-right">
-                        {search.results.hits && (
-                            current8.slice(4, 8).map(hit => (
+                        {hits && (
+                            current8Items.slice(4, 8).map(hit => (
                                 <div key={`key-${hit.objectID}`}>
                                     <NewsComponent {...hit} />
                                 </div>
@@ -38,7 +38,7 @@ const News: React.FC<INews> = ({ type }) => {
                 </div>
             </div>
             <div className="pagination">
-                <PaginationComponent onChange={onChangePagination} itemsCount={!search.results.hits ? 0 : Math.ceil(search.results.hits.length / 8)} />
+                <PaginationComponent onChange={onChangePagination} itemsCount={!hits ? 0 : Math.ceil(hits.length / 8)} />
             </div>
         </div>
     )

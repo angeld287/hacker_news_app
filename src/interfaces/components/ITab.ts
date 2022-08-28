@@ -1,3 +1,4 @@
+import IHit from "../models/IHit";
 import { IButtonGroup } from "./IButtonGroup";
 import { INews } from "./INews";
 
@@ -7,6 +8,7 @@ export interface ITab {
 }
 export interface ITabBody {
     components: Array<IChildrenComponent>;
+    hits?: IHit
 }
 
 export interface IChildrenComponent {
