@@ -22,9 +22,15 @@ const useHackerNews = () => {
     useEffect(() => {
         if (effecRan.current === false) {
             const newsType = localSService.getNewsType()
+            const myFaves = localSService.getMyFavesHits()
+
             if (newsType) {
                 dispatch(searchAsync({ query: newsType, page: '0' }))
                 dispatch(setNewsType(newsType))
+            }
+
+            if (myFaves) {
+                setLocalHits(myFaves)
             }
         }
         return () => {
@@ -60,7 +66,10 @@ const useHackerNews = () => {
             {
                 component: {
                     type: TabType.ALL,
-                    hits: apiHits.filter(hit => hit.query === search.newsType)
+                    hits: apiHits.filter(hit => hit.query === search.newsType).map(hit => {
+
+                        return hit
+                    })
                 }, isActive: activeTab === TabType.ALL,
                 key: "key-all"
             },

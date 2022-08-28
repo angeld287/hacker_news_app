@@ -64,8 +64,12 @@ const useNews = (hits: Array<IHit> | undefined) => {
     }, [localSService, search, dispatch])
 
     const addNewsToFaves = useCallback((objectId: string) => {
-        console.log(objectId)
-    }, [])
+        if (search.results.hits) {
+            const hit = search.results.hits.find((hit => hit.objectID === objectId))
+            if (hit)
+                console.log(localSService.addFave(hit));
+        }
+    }, [search.results.hits, localSService])
 
     const removeNewsFromFaves = useCallback((objectId: string) => {
         console.log(objectId)
