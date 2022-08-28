@@ -16,8 +16,8 @@
     float: left;
 }
 
-.body {
-    width: 87.63%
+.column-body {
+    width: 87.63%;
 }
 
 .actions {
@@ -29,7 +29,19 @@
 }
 
 .actions button {
-    margin-top: 40%;
+    margin-top: 70%;
     border: none;
     background-color: #F5F5F5;
+}
+
+.title-row {
+    text-align: left;
+    font-family: Roboto;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: 0.25px;
+    color: #828282;
 }
