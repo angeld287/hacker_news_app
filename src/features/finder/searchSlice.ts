@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Options } from '../../interfaces/components/ISelect';
+import IHit from '../../interfaces/models/IHit';
+import localStoreService from '../../services/localStoreService';
 import { searchAsync } from './asyncThunks';
 import { ICurrentPage, ISearchRecord, ISearchSlice } from './ISearch';
 
+const myFaves: Array<IHit> = new localStoreService().getMyFavesHits();
+
 export const initialState: ISearchSlice = {
   status: 'idle',
+  localHits: [],
   results: {
     query: "",
     hits: null,
@@ -42,6 +47,16 @@ export const searchSlice = createSlice({
     },
     setNewsType: (state, action: PayloadAction<Options>) => {
       state.newsType = action.payload
+    },
+    setLocalHits: (state, action: PayloadAction<Array<IHit>>) => {
+      state.localHits = action.payload
+    },
+    addLocalHit: (state, action: PayloadAction<IHit>) => {
+      state.localHits.push(action.payload)
+    },
+    removeLocalHit: (state, action: PayloadAction<IHit>) => {
+      const hitIndex = state.localHits.findIndex(hit => hit.objectID === action.payload.objectID)
+      state.localHits.slice(hitIndex, 1)
     }
   },
 
@@ -54,6 +69,7 @@ export const searchSlice = createSlice({
       .addCase(searchAsync.fulfilled, (state, action) => {
         const prev = state.results.hits ? state.results.hits : []
         const next = action.payload.hits ? action.payload.hits.map(hit => {
+          hit.isInMyFaves = myFaves.find(fave => fave.objectID === hit.objectID) ? true : false;
           hit.query = action.payload.query
           hit.page = action.payload.page.toString()
           return hit
@@ -72,7 +88,7 @@ export const searchSlice = createSlice({
 });
 
 //Actions
-export const { setCurrentSearchProps, setApiCurrentPage, setNewsType } = searchSlice.actions;
+export const { setCurrentSearchProps, setApiCurrentPage, setNewsType, setLocalHits, addLocalHit, removeLocalHit } = searchSlice.actions;
 
 export const selectSearch = (state: RootState) => state.finder;
 

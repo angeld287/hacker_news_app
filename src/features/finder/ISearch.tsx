@@ -1,5 +1,6 @@
 import { Options } from "../../interfaces/components/ISelect";
 import { IResponse } from "../../interfaces/IResponse";
+import IHit from "../../interfaces/models/IHit";
 
 export interface ISearchProps {
     query: string;
@@ -9,10 +10,11 @@ export interface ISearchProps {
 export interface ISearchSlice {
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
     results: IResponse;
-    records: Array<ISearchRecord>
-    currentSearchProps: ISearchRecord
-    apiCurrentPage: Array<ICurrentPage>,
-    newsType: Options | null
+    localHits: Array<IHit>;
+    records: Array<ISearchRecord>;
+    currentSearchProps: ISearchRecord;
+    apiCurrentPage: Array<ICurrentPage>;
+    newsType: Options | null;
 }
 
 export interface ISearchRecord {

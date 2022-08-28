@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
-import { selectSearch, setNewsType } from "../../features/finder/searchSlice";
+import { selectSearch, setLocalHits, setNewsType } from "../../features/finder/searchSlice";
 import { IButtonGroup } from "../../interfaces/components/IButtonGroup";
 import { Options } from "../../interfaces/components/ISelect";
 import { ITabBody, TabType } from "../../interfaces/components/ITab";
@@ -12,7 +12,6 @@ import localStoreService from "../../services/localStoreService";
 const useHackerNews = () => {
     const [activeTab, setActiveTab] = useState(1)
     const [apiHits, setApiHits] = useState<Array<IHit>>([])
-    const [localHits, setLocalHits] = useState<Array<IHit>>([])
     const dispatch = useAppDispatch();
     const effecRan = useRef(false)
 
@@ -30,7 +29,7 @@ const useHackerNews = () => {
             }
 
             if (myFaves) {
-                setLocalHits(myFaves)
+                dispatch(setLocalHits(myFaves))
             }
         }
         return () => {
@@ -66,22 +65,19 @@ const useHackerNews = () => {
             {
                 component: {
                     type: TabType.ALL,
-                    hits: apiHits.filter(hit => hit.query === search.newsType).map(hit => {
-
-                        return hit
-                    })
+                    hits: apiHits.filter(hit => hit.query === search.newsType)
                 }, isActive: activeTab === TabType.ALL,
                 key: "key-all"
             },
             {
                 component: {
                     type: TabType.FAVORITE,
-                    hits: localHits
+                    hits: search.localHits
                 }, isActive: activeTab === TabType.FAVORITE,
                 key: "key-fav"
             }
         ]
-    }), [activeTab, apiHits, localHits, search.newsType]);
+    }), [activeTab, apiHits, search.localHits, search.newsType]);
 
     return { tabButtons, tabBody };
 }

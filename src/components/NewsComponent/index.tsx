@@ -9,7 +9,8 @@ const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url
             <a target="_blank" rel="noreferrer" href={story_url}>{story_title}</a>
             {created_at}
             {author}
-            <button onClick={addToFaves}>Add to Fav</button>
+            {!isInMyFaves && <button onClick={addToFaves}>Add to Fav</button>}
+            {isInMyFaves && <button onClick={removeFromFaves}>Remove from Fav</button>}
         </div>
     )
 }

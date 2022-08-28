@@ -8,7 +8,7 @@ import './styles.css';
 import useNews from './useNews';
 
 const News: React.FC<INews> = ({ type, hits }) => {
-    const { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves } = useNews(hits);
+    const { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves } = useNews(hits, type);
 
     return (
         <div>

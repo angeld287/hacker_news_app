@@ -17,6 +17,7 @@ export default interface IHit {
     _highlightResult: IHighlightResult,
     query?: string;
     page?: string;
+    isInMyFaves?: boolean;
 }
 
 interface IHighlightResult {
