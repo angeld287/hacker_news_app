@@ -8,7 +8,7 @@ import './styles.css';
 import useNews from './useNews';
 
 const News: React.FC<INews> = ({ type, hits }) => {
-    const { options, onChangePagination, current8Items, onChangeSelect } = useNews(hits);
+    const { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves } = useNews(hits);
 
     return (
         <div>
@@ -21,7 +21,7 @@ const News: React.FC<INews> = ({ type, hits }) => {
                         {hits && (
                             current8Items.slice(0, 4).map(hit => (
                                 <div key={`key-${hit.objectID}`}>
-                                    <NewsComponent {...hit} />
+                                    <NewsComponent {...hit} addToFaves={() => { addNewsToFaves(hit.objectID) }} removeFromFaves={() => { removeNewsFromFaves(hit.objectID) }} />
                                 </div>
                             ))
                         )}
@@ -30,7 +30,7 @@ const News: React.FC<INews> = ({ type, hits }) => {
                         {hits && (
                             current8Items.slice(4, 8).map(hit => (
                                 <div key={`key-${hit.objectID}`}>
-                                    <NewsComponent {...hit} />
+                                    <NewsComponent {...hit} addToFaves={() => { addNewsToFaves(hit.objectID) }} removeFromFaves={() => { removeNewsFromFaves(hit.objectID) }} />
                                 </div>
                             ))
                         )}

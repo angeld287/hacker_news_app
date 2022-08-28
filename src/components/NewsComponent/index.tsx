@@ -1,21 +1,17 @@
 import React from 'react';
-import IHit from '../../interfaces/models/IHit';
+import { IHitComponent } from '../../interfaces/components/IHits';
 import './styles.css';
 
-const NewsComponent: React.FC<IHit> = (hit) => {
-    //author, story_title, story_url, created_at
+const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url, created_at, addToFaves, removeFromFaves, isInMyFaves }) => {
 
-    const addToFaves = () => {
-
-    }
     return (
         <div className="Rectangle">
-            <a target="_blank" rel="noreferrer" href={hit.story_url}>{hit.story_title}</a>
-            {hit.created_at}
-            {hit.author}
+            <a target="_blank" rel="noreferrer" href={story_url}>{story_title}</a>
+            {created_at}
+            {author}
             <button onClick={addToFaves}>Add to Fav</button>
         </div>
     )
 }
 
-export default NewsComponent
+export default React.memo(NewsComponent)

@@ -51,7 +51,11 @@ const useNews = (hits: Array<IHit> | undefined) => {
         dispatch(setNewsType(e.target.value as Options))
 
         const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)
+        //console.log('query: ', e.target.value);
+        //console.log('page: ', currentPage);
         const hitsByPageAndQuery = search.results.hits?.filter(hit => hit.query === e.target.value && hit.page == currentPage?.page);
+        //console.log('hitsByPageAndQuery: ', hitsByPageAndQuery);
+
         if (currentPage && hitsByPageAndQuery && hitsByPageAndQuery.length === 0) {
             dispatch(searchAsync({ query: e.target.value, page: currentPage.page.toString() }))
         }
@@ -59,7 +63,15 @@ const useNews = (hits: Array<IHit> | undefined) => {
 
     }, [localSService, search, dispatch])
 
-    return { options, onChangePagination, current8Items, onChangeSelect };
+    const addNewsToFaves = useCallback((objectId: string) => {
+        console.log(objectId)
+    }, [])
+
+    const removeNewsFromFaves = useCallback((objectId: string) => {
+        console.log(objectId)
+    }, [])
+
+    return { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves };
 }
 
 export default useNews
