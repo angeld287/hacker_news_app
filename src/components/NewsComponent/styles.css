@@ -29,7 +29,7 @@
 }
 
 .actions button {
-    margin-top: 70%;
+    margin-top: 40%;
     border: none;
     background-color: #F5F5F5;
 }
@@ -44,4 +44,29 @@
     line-height: 1.43;
     letter-spacing: 0.25px;
     color: #828282;
+}
+
+.time-row {
+    content: "";
+    display: table;
+    clear: both;
+    margin-top: 1.67rem;
+    margin-bottom: 0.375rem;
+}
+
+.time-column {
+    float: left;
+}
+
+.time-description {
+    margin-top: 0.15rem;
+    margin-left: 0.25rem;
+    font-family: Roboto;
+    font-size: 0.688rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #767676;
 }
