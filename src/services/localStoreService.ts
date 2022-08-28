@@ -13,7 +13,7 @@ class localStoreService implements ILocalStoreService {
         try {
             const stringHits = localStorage.getItem(this.myFavsKey)
             if (stringHits)
-                results = <Array<IHit>>JSON.parse(stringHits)
+                results = JSON.parse(stringHits) as Array<IHit>
 
         } catch (error) {
             console.log(error);
@@ -55,7 +55,7 @@ class localStoreService implements ILocalStoreService {
         try {
             const stringOption = localStorage.getItem(this.newsTypeKey)
             if (stringOption)
-                results = <Options>JSON.parse(stringOption)
+                results = JSON.parse(stringOption) as Options
 
         } catch (error) {
             console.log(error);

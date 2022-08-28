@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
-import { selectSearch } from "../../features/finder/searchSlice";
+import { selectSearch, setNewsType } from "../../features/finder/searchSlice";
 import { IButtonGroup } from "../../interfaces/components/IButtonGroup";
 import { Options } from "../../interfaces/components/ISelect";
 import { ITabBody, TabType } from "../../interfaces/components/ITab";
 import IHit from "../../interfaces/models/IHit";
+import ILocalStoreService from "../../interfaces/services/ILocalStoreService";
+import localStoreService from "../../services/localStoreService";
 
 const useHackerNews = () => {
     const [activeTab, setActiveTab] = useState(1)
@@ -15,27 +17,19 @@ const useHackerNews = () => {
     const effecRan = useRef(false)
 
     const search = useAppSelector(selectSearch);
-
-
-    //const onSearch = useCallback((query: Options, page: string) => {
-    //    //console.log('time');
-    //    const q = (search.records.find(searchRecord => searchRecord.page === page && searchRecord.type === query))
-    //    //console.log(q, search.status, search.records);
-    //
-    //    if (!q && search.status !== 'pending') {
-    //        dispatch(setCurrentSearchProps({ type: query, page }))
-    //        dispatch(searchAsync({ query, page }))
-    //    }
-    //}, [dispatch, search]);
+    const localSService: ILocalStoreService = useMemo(() => new localStoreService(), [])
 
     useEffect(() => {
         if (effecRan.current === false) {
             dispatch(searchAsync({ query: Options.ANGULAR, page: '0' }))
+            const newsType = localSService.getNewsType()
+            if (newsType)
+                dispatch(setNewsType(newsType))
         }
         return () => {
             effecRan.current = true
         }
-    }, [dispatch])
+    }, [dispatch, localSService])
 
     useEffect(() => {
         if (search.apiCurrentPage !== 0)

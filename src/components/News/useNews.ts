@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectSearch, setApiCurrentPage } from "../../features/finder/searchSlice";
 import { ISelectOptions, Options } from "../../interfaces/components/ISelect";
 import IHit from "../../interfaces/models/IHit";
+import ILocalStoreService from "../../interfaces/services/ILocalStoreService";
+import localStoreService from "../../services/localStoreService";
 import { getIndexFromSelectedPage, getRangeFromArray } from "../../utils/tools";
 
 const useNews = (hits: Array<IHit> | undefined) => {
@@ -11,6 +13,8 @@ const useNews = (hits: Array<IHit> | undefined) => {
 
     const search = useAppSelector(selectSearch);
     const dispatch = useAppDispatch();
+
+    const localSService: ILocalStoreService = useMemo(() => new localStoreService(), [])
 
     useEffect(() => {
         if (hits) {
@@ -36,7 +40,11 @@ const useNews = (hits: Array<IHit> | undefined) => {
         ]), []
     )
 
-    return { options, onChangePagination, current8Items };
+    const onChangeSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+        localSService.updateNewsType(e.target.value as Options)
+    }, [localSService])
+
+    return { options, onChangePagination, current8Items, onChangeSelect, search };
 }
 
 export default useNews

@@ -11,7 +11,8 @@ export const initialState: ISearchSlice = {
   },
   records: [],
   currentSearchProps: { page: '0', type: Options.ANGULAR },
-  apiCurrentPage: 0
+  apiCurrentPage: 0,
+  newsType: null
 };
 
 export const searchSlice = createSlice({
@@ -26,6 +27,9 @@ export const searchSlice = createSlice({
     setApiCurrentPage: (state, action: PayloadAction<number>) => {
       state.apiCurrentPage = action.payload;
     },
+    setNewsType: (state, action: PayloadAction<Options>) => {
+      state.newsType = action.payload
+    }
   },
 
   //async operations
@@ -51,7 +55,7 @@ export const searchSlice = createSlice({
 });
 
 //Actions
-export const { setCurrentSearchProps, setApiCurrentPage } = searchSlice.actions;
+export const { setCurrentSearchProps, setApiCurrentPage, setNewsType } = searchSlice.actions;
 
 export const selectSearch = (state: RootState) => state.finder;
 

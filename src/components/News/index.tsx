@@ -1,5 +1,6 @@
 import React from 'react';
 import { INews } from '../../interfaces/components/INews';
+import { Options } from '../../interfaces/components/ISelect';
 import { TabType } from '../../interfaces/components/ITab';
 import NewsComponent from '../NewsComponent';
 import PaginationComponent from '../PaginationComponent';
@@ -8,12 +9,12 @@ import './styles.css';
 import useNews from './useNews';
 
 const News: React.FC<INews> = ({ type, hits }) => {
-    const { options, onChangePagination, current8Items } = useNews(hits);
+    const { options, onChangePagination, current8Items, onChangeSelect, search } = useNews(hits);
 
     return (
         <div>
             <div>
-                {type === TabType.ALL && <SelectComponent placeholder='Select your news' options={options} />}
+                {type === TabType.ALL && <SelectComponent placeholder='Select your news' defaultValue={search.newsType ? search.newsType : Options.ANGULAR} onChange={onChangeSelect} options={options} />}
             </div>
             <div className="hits-body">
                 <div className="row">

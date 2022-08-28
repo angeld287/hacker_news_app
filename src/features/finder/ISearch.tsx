@@ -11,7 +11,8 @@ export interface ISearchSlice {
     results: IResponse;
     records: Array<ISearchRecord>
     currentSearchProps: ISearchRecord
-    apiCurrentPage: number
+    apiCurrentPage: number,
+    newsType: Options | null
 }
 
 export interface ISearchRecord {
