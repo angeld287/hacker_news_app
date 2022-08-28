@@ -42,15 +42,15 @@ a {
 }
 
 .title-row {
+    width: 90%;
     text-align: left;
     font-family: Roboto;
     font-size: 0.875rem;
+    color: #828282;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.43;
     letter-spacing: 0.25px;
-    color: #828282;
 }
 
 .time-row {
