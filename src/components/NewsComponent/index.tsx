@@ -9,11 +9,13 @@ const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url
         <div className="news-component">
             <div className="news-column body">
                 <div className="time-row">
-                    <div className="clock-icon"></div>
+                    <div className="clock-icon">
+                        <img src="src/assets/iconmonstr-time-2.png" className="iconmonstr-time-2" />
+                    </div>
                     <div className="time-description">{created_at} {author}</div>
                 </div>
                 <div className="title-row">
-                    {story_title}
+                    <b>{story_title}</b>
                 </div>
             </div>
             <div className="news-column actions">
