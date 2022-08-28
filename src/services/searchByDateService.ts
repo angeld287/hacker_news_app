@@ -20,7 +20,8 @@ class searchByDateService implements ISearchByDateService {
         } catch (error) {
             let errorResult: IResponse = {
                 hits: null,
-                query: ""
+                query: "",
+                page: 0
             }
             return errorResult
         }

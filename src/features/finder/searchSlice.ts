@@ -8,11 +8,16 @@ export const initialState: ISearchSlice = {
   status: 'idle',
   results: {
     query: "",
-    hits: null
+    hits: null,
+    page: 0,
   },
   records: [],
   currentSearchProps: { page: '0', type: Options.ANGULAR },
-  apiCurrentPage: [],
+  apiCurrentPage: [
+    { page: 0, type: Options.ANGULAR },
+    { page: 0, type: Options.REACT },
+    { page: 0, type: Options.VUE },
+  ],
   newsType: null
 };
 
@@ -50,6 +55,7 @@ export const searchSlice = createSlice({
         const prev = state.results.hits ? state.results.hits : []
         const next = action.payload.hits ? action.payload.hits.map(hit => {
           hit.query = action.payload.query
+          hit.page = action.payload.page.toString()
           return hit
         }) : []
 

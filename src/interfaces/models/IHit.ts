@@ -16,6 +16,7 @@ export default interface IHit {
     objectID: string;
     _highlightResult: IHighlightResult,
     query?: string;
+    page?: string;
 
 }
 

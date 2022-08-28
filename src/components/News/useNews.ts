@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { searchAsync } from "../../features/finder/asyncThunks";
 import { selectSearch, setApiCurrentPage, setNewsType } from "../../features/finder/searchSlice";
 import { ISelectOptions, Options } from "../../interfaces/components/ISelect";
 import IHit from "../../interfaces/models/IHit";
@@ -35,7 +36,7 @@ const useNews = (hits: Array<IHit> | undefined) => {
             }
         }
         setSelectedPage(page)
-    }, [dispatch, setSelectedPage, hits, search.apiCurrentPage])
+    }, [dispatch, setSelectedPage, hits, search.apiCurrentPage, search.newsType])
 
     const options: Array<ISelectOptions> = useMemo(
         () => ([
@@ -48,7 +49,15 @@ const useNews = (hits: Array<IHit> | undefined) => {
     const onChangeSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         localSService.updateNewsType(e.target.value as Options)
         dispatch(setNewsType(e.target.value as Options))
-    }, [localSService])
+
+        const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)
+        const hitsByPageAndQuery = search.results.hits?.filter(hit => hit.query === e.target.value && hit.page == currentPage?.page);
+        if (currentPage && hitsByPageAndQuery && hitsByPageAndQuery.length === 0) {
+            dispatch(searchAsync({ query: e.target.value, page: currentPage.page.toString() }))
+        }
+
+
+    }, [localSService, search, dispatch])
 
     return { options, onChangePagination, current8Items, onChangeSelect };
 }
