@@ -7,6 +7,7 @@ import { ISearchRecord, ISearchSlice } from './ISearch';
 export const initialState: ISearchSlice = {
   status: 'idle',
   results: {
+    query: "",
     hits: null
   },
   records: [],
@@ -40,7 +41,10 @@ export const searchSlice = createSlice({
       })
       .addCase(searchAsync.fulfilled, (state, action) => {
         const prev = state.results.hits ? state.results.hits : []
-        const next = action.payload.hits ? action.payload.hits : []
+        const next = action.payload.hits ? action.payload.hits.map(hit => {
+          hit.query = action.payload.query
+          return hit
+        }) : []
 
         state.records.push(state.currentSearchProps)
         state.results.hits = [...prev, ...next]

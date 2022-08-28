@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectSearch, setApiCurrentPage } from "../../features/finder/searchSlice";
+import { selectSearch, setApiCurrentPage, setNewsType } from "../../features/finder/searchSlice";
 import { ISelectOptions, Options } from "../../interfaces/components/ISelect";
 import IHit from "../../interfaces/models/IHit";
 import ILocalStoreService from "../../interfaces/services/ILocalStoreService";
@@ -42,6 +42,7 @@ const useNews = (hits: Array<IHit> | undefined) => {
 
     const onChangeSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         localSService.updateNewsType(e.target.value as Options)
+        dispatch(setNewsType(e.target.value as Options))
     }, [localSService])
 
     return { options, onChangePagination, current8Items, onChangeSelect };

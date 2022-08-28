@@ -19,7 +19,8 @@ class searchByDateService implements ISearchByDateService {
             return await fetchResult;
         } catch (error) {
             let errorResult: IResponse = {
-                hits: null
+                hits: null,
+                query: ""
             }
             return errorResult
         }

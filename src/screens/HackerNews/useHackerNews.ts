@@ -21,10 +21,11 @@ const useHackerNews = () => {
 
     useEffect(() => {
         if (effecRan.current === false) {
-            dispatch(searchAsync({ query: Options.ANGULAR, page: '0' }))
             const newsType = localSService.getNewsType()
-            if (newsType)
+            if (newsType) {
+                dispatch(searchAsync({ query: newsType, page: '0' }))
                 dispatch(setNewsType(newsType))
+            }
         }
         return () => {
             effecRan.current = true
@@ -32,12 +33,14 @@ const useHackerNews = () => {
     }, [dispatch, localSService])
 
     useEffect(() => {
-        if (search.apiCurrentPage !== 0)
-            dispatch(searchAsync({ query: Options.ANGULAR, page: search.apiCurrentPage.toString() }))
+        if (search.apiCurrentPage !== 0 && search.newsType)
+            dispatch(searchAsync({ query: search.newsType as string, page: search.apiCurrentPage.toString() }))
     }, [search.apiCurrentPage, dispatch])
 
     useEffect(() => {
         if (search.results.hits) {
+            console.log(search.results.hits);
+
             setApiHits(search.results.hits)
         }
     }, [search.results.hits]);
@@ -56,7 +59,7 @@ const useHackerNews = () => {
             {
                 component: {
                     type: TabType.ALL,
-                    hits: apiHits
+                    hits: apiHits.filter(hit => hit.query === search.newsType)
                 }, isActive: activeTab === TabType.ALL,
                 key: "key-all"
             },
@@ -68,7 +71,7 @@ const useHackerNews = () => {
                 key: "key-fav"
             }
         ]
-    }), [activeTab, apiHits, localHits]);
+    }), [activeTab, apiHits, localHits, search.newsType]);
 
     return { tabButtons, tabBody };
 }

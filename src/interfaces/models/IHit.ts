@@ -14,7 +14,8 @@ export default interface IHit {
     created_at_i: number;
     _tags: string[];
     objectID: string;
-    _highlightResult: IHighlightResult
+    _highlightResult: IHighlightResult,
+    query?: string;
 
 }
 
