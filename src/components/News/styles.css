@@ -17,15 +17,7 @@
     text-align: center;
 }
 
-.row>.column-left {
-    border: #D30058 2px solid;
-}
-
-.row>.column-right {
-    border: #23B776 2px solid;
-}
-
-@media(min-width:576px) {
+@media(min-width:900px) {
     .row {
         flex-flow: row wrap;
     }
@@ -41,7 +33,7 @@
     }
 }
 
-@media(min-width:768px) {
+@media(min-width:1200px) {
     .row {
         flex-flow: row nowrap;
     }
@@ -57,8 +49,4 @@
     .row>.column-right {
         order: 3;
     }
-}
-
-.hits-body {
-    margin-top: 38px
 }

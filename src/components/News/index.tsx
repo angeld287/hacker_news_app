@@ -16,6 +16,7 @@ const News: React.FC<INews> = ({ type, hits }) => {
                 {type === TabType.ALL && <SelectComponent placeholder='Select your news' onChange={onChangeSelect} options={options} />}
             </div>
             <div className="hits-body">
+                {type === TabType.FAVORITE && hits && hits.length === 0 && <span>No faves found.</span>}
                 <div className="row">
                     <div className="column-left">
                         {hits && (

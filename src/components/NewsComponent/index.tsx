@@ -5,7 +5,7 @@ import './styles.css';
 const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url, created_at, addToFaves, removeFromFaves, isInMyFaves }) => {
 
     return (
-        <div className="Rectangle">
+        <div className="news-component">
             <a target="_blank" rel="noreferrer" href={story_url}>{story_title}</a>
             {created_at}
             {author}
