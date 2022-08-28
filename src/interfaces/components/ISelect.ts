@@ -10,6 +10,7 @@ export interface ISelect {
 export interface ISelectOptions {
     text: string;
     value: string;
+    image: string;
 }
 
 export enum Options {

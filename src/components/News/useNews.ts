@@ -8,6 +8,7 @@ import IHit from "../../interfaces/models/IHit";
 import ILocalStoreService from "../../interfaces/services/ILocalStoreService";
 import localStoreService from "../../services/localStoreService";
 import { getIndexFromSelectedPage, getRangeFromArray } from "../../utils/tools";
+import { SelectChangeEvent } from '@mui/material/Select';
 
 const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
     const [current8Items, setCurrent8Items] = useState<Array<IHit>>([]);
@@ -52,25 +53,21 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
 
     const options: Array<ISelectOptions> = useMemo(
         () => ([
-            { text: "Angular", value: Options.ANGULAR },
-            { text: "React", value: Options.REACT },
-            { text: "Vuejs", value: Options.VUE },
+            { text: "Angular", value: Options.ANGULAR, image: "https://github.com/angeld287/hacker_news_app/blob/master/src/assets/image-138/image-138.png?raw=true" },
+            { text: "React", value: Options.REACT, image: "https://github.com/angeld287/hacker_news_app/blob/master/src/assets/image-140/image-140.png?raw=true" },
+            { text: "Vuejs", value: Options.VUE, image: "https://github.com/angeld287/hacker_news_app/blob/master/src/assets/image-141/image-141.png?raw=true" },
         ]), []
     )
 
     const onChangeSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         if (type === TabType.ALL) {
-            localSService.updateNewsType(e.target.value as Options)
-            dispatch(setNewsType(e.target.value as Options))
-
+            const value = e.target.value;
+            localSService.updateNewsType(value as Options)
+            dispatch(setNewsType(value as Options))
             const currentPage = search.apiCurrentPage.find(page => page.type === search.newsType)
-            //console.log('query: ', e.target.value);
-            //console.log('page: ', currentPage);
-            const hitsByPageAndQuery = search.results.hits?.filter(hit => hit.query === e.target.value && parseInt(hit.page ? hit.page : "0") === currentPage?.page);
-            //console.log('hitsByPageAndQuery: ', hitsByPageAndQuery);
-
+            const hitsByPageAndQuery = search.results.hits?.filter(hit => hit.query === value && parseInt(hit.page ? hit.page : "0") === currentPage?.page);
             if (currentPage && hitsByPageAndQuery && hitsByPageAndQuery.length === 0) {
-                dispatch(searchAsync({ query: e.target.value, page: currentPage.page.toString() }))
+                dispatch(searchAsync({ query: value, page: currentPage.page.toString() }))
             }
         }
     }, [localSService, search, dispatch, type])
