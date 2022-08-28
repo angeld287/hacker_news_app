@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import SearchByDateService from "../../apis/searchByDateService";
+import SearchByDateService from "../../services/searchByDateService";
 import ISearchByDateService from "../../interfaces/services/ISearchByDateService";
 import { ISearchProps } from "./ISearch";
 

@@ -40,7 +40,7 @@ const useHackerNews = () => {
     useEffect(() => {
         if (search.apiCurrentPage !== 0)
             dispatch(searchAsync({ query: Options.ANGULAR, page: search.apiCurrentPage.toString() }))
-    }, [search.apiCurrentPage])
+    }, [search.apiCurrentPage, dispatch])
 
     useEffect(() => {
         if (search.results.hits) {

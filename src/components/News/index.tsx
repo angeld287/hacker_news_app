@@ -15,7 +15,7 @@ const News: React.FC<INews> = ({ type, hits }) => {
             <div>
                 {type === TabType.ALL && <SelectComponent placeholder='Select your news' options={options} />}
             </div>
-            <div>
+            <div className="hits-body">
                 <div className="row">
                     <div className="column-left">
                         {hits && (
