@@ -44,7 +44,7 @@ const useNews = (hits: Array<IHit> | undefined) => {
         localSService.updateNewsType(e.target.value as Options)
     }, [localSService])
 
-    return { options, onChangePagination, current8Items, onChangeSelect, search };
+    return { options, onChangePagination, current8Items, onChangeSelect };
 }
 
 export default useNews
