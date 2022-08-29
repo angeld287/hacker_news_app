@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { searchAsync } from "../../features/finder/asyncThunks";
-import { addLocalHit, removeLocalHit, selectSearch, setApiCurrentPage, setNewsType } from "../../features/finder/searchSlice";
+import { addLocalHit, removeLocalHit, selectSearch, setApiCurrentPage, setApiHits, setNewsType } from "../../features/finder/searchSlice";
 import { ISelectOptions, Options } from "../../interfaces/components/ISelect";
 import { TabType } from "../../interfaces/components/ITab";
 import IHit from "../../interfaces/models/IHit";
@@ -22,16 +22,7 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
         if (hits) {
             const startIndex: number = getIndexFromSelectedPage(selectedPage, 8)
             const endIndex: number = startIndex + 7;
-            if (type === TabType.FAVORITE) {
-                let _hits = hits.map(hit => {
-                    //hit.isInMyFaves = true
-                    return hit
-                })
-                setCurrent8Items(getRangeFromArray(_hits, startIndex, endIndex))
-            } else {
-                setCurrent8Items(getRangeFromArray(hits, startIndex, endIndex))
-            }
-
+            setCurrent8Items(getRangeFromArray(hits, startIndex, endIndex))
         }
     }, [hits, selectedPage, type])
 
@@ -80,13 +71,29 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
     }, [search.results.hits, localSService, dispatch])
 
     const removeNewsFromFaves = useCallback((objectId: string) => {
-        if (search.results.hits) {
-            const hit = search.results.hits.find((hit => hit.objectID === objectId))
+        const apiHits = search.results.hits
+        if (apiHits) {
+            const hit = apiHits.find((hit => hit.objectID === objectId))
             if (hit)
-                if (localSService.removeFave(hit))
+                if (localSService.removeFave(hit)) {
                     dispatch(removeLocalHit(hit))
+                    updateApiHit(hit, apiHits)
+                }
         }
     }, [search.results.hits, localSService, dispatch])
+
+    const updateApiHit = useCallback((hit: IHit, hits: Array<IHit>) => {
+        const modifiedHit: IHit = { ...hit, isInMyFaves: false }
+        const index = hits.findIndex(hit => hit.objectID === modifiedHit.objectID)
+
+        const newList = [
+            ...hits.slice(0, index),
+            modifiedHit,
+            ...hits.slice(index + 1)
+        ];
+        dispatch(setApiHits(newList));
+
+    }, [])
 
     return { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves, search };
 }

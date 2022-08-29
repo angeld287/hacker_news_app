@@ -44,8 +44,6 @@ const useHackerNews = () => {
 
     useEffect(() => {
         if (search.results.hits) {
-            console.log(search.results.hits);
-
             setApiHits(search.results.hits)
         }
     }, [search.results.hits]);
@@ -64,12 +62,7 @@ const useHackerNews = () => {
             {
                 component: {
                     type: TabType.ALL,
-                    hits: apiHits.filter(hit => hit.query === search.newsType && (
-                        hit.story_url !== null &&
-                        hit.author !== null &&
-                        hit.story_title !== null &&
-                        hit.created_at !== null
-                    ))
+                    hits: apiHits.filter(hit => hit.query === search.newsType)
                 }, isActive: activeTab === TabType.ALL,
                 key: "key-all"
             },

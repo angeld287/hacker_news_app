@@ -57,6 +57,9 @@ export const searchSlice = createSlice({
     removeLocalHit: (state, action: PayloadAction<IHit>) => {
       const hitIndex = state.localHits.findIndex(hit => hit.objectID === action.payload.objectID)
       state.localHits.splice(hitIndex, 1)
+    },
+    setApiHits: (state, action: PayloadAction<Array<IHit>>) => {
+      state.results.hits = action.payload
     }
   },
 
@@ -92,7 +95,7 @@ export const searchSlice = createSlice({
 });
 
 //Actions
-export const { setCurrentSearchProps, setApiCurrentPage, setNewsType, setLocalHits, addLocalHit, removeLocalHit } = searchSlice.actions;
+export const { setCurrentSearchProps, setApiCurrentPage, setNewsType, setLocalHits, addLocalHit, removeLocalHit, setApiHits } = searchSlice.actions;
 
 export const selectSearch = (state: RootState) => state.finder;
 
