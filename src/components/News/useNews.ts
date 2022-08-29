@@ -61,31 +61,6 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
         }
     }, [localSService, search, dispatch, type])
 
-    const addNewsToFaves = useCallback((objectId: string) => {
-        const apiHits = search.results.hits
-        if (apiHits) {
-            const hit = apiHits.find((hit => hit.objectID === objectId))
-            if (hit)
-                if (localSService.addFave(hit)) {
-                    dispatch(addLocalHit(hit))
-                    updateApiHitFave(hit, apiHits, true)
-                }
-
-        }
-    }, [search.results.hits, localSService, dispatch])
-
-    const removeNewsFromFaves = useCallback((objectId: string) => {
-        const apiHits = search.results.hits
-        if (apiHits) {
-            const hit = apiHits.find((hit => hit.objectID === objectId))
-            if (hit)
-                if (localSService.removeFave(hit)) {
-                    dispatch(removeLocalHit(hit))
-                    updateApiHitFave(hit, apiHits, false)
-                }
-        }
-    }, [search.results.hits, localSService, dispatch])
-
     const updateApiHitFave = useCallback((hit: IHit, hits: Array<IHit>, fave: boolean) => {
         const modifiedHit: IHit = { ...hit, isInMyFaves: fave }
         const index = hits.findIndex(hit => hit.objectID === modifiedHit.objectID)
@@ -97,7 +72,32 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
         ];
         dispatch(setApiHits(newList));
 
-    }, [])
+    }, [dispatch])
+
+    const addNewsToFaves = useCallback((objectId: string) => {
+        const apiHits = search.results.hits
+        if (apiHits) {
+            const hit = apiHits.find((hit => hit.objectID === objectId))
+            if (hit)
+                if (localSService.addFave(hit)) {
+                    dispatch(addLocalHit(hit))
+                    updateApiHitFave(hit, apiHits, true)
+                }
+
+        }
+    }, [search.results.hits, localSService, dispatch, updateApiHitFave])
+
+    const removeNewsFromFaves = useCallback((objectId: string) => {
+        const apiHits = search.results.hits
+        if (apiHits) {
+            const hit = apiHits.find((hit => hit.objectID === objectId))
+            if (hit)
+                if (localSService.removeFave(hit)) {
+                    dispatch(removeLocalHit(hit))
+                    updateApiHitFave(hit, apiHits, false)
+                }
+        }
+    }, [search.results.hits, localSService, dispatch, updateApiHitFave])
 
     return { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves, search };
 }
