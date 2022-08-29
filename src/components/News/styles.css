@@ -51,6 +51,20 @@
     }
 }
 
+.news-body {
+    position: relative;
+}
+
+.hidden {
+    display: none
+}
+
+.news-loading-image {
+    position: absolute;
+    top: 25;
+    right: 43%;
+}
+
 .opacity {
     opacity: 0.5;
     pointer-events: none;
