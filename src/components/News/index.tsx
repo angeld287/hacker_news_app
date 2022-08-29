@@ -25,7 +25,7 @@ const News: React.FC<INews> = ({ type, hits }) => {
                         {hits && (
                             current8Items.slice(0, 4).map(hit => (
                                 <div key={`key-${hit.objectID}`}>
-                                    <NewsComponent {...hit} addToFaves={() => { addNewsToFaves(hit.objectID) }} removeFromFaves={() => { removeNewsFromFaves(hit.objectID) }} />
+                                    <NewsComponent {...hit} type={type} addToFaves={() => { addNewsToFaves(hit.objectID) }} removeFromFaves={() => { removeNewsFromFaves(hit.objectID) }} />
                                 </div>
                             ))
                         )}
@@ -34,7 +34,7 @@ const News: React.FC<INews> = ({ type, hits }) => {
                         {hits && (
                             current8Items.slice(4, 8).map(hit => (
                                 <div key={`key-${hit.objectID}`}>
-                                    <NewsComponent {...hit} addToFaves={() => { addNewsToFaves(hit.objectID) }} removeFromFaves={() => { removeNewsFromFaves(hit.objectID) }} />
+                                    <NewsComponent {...hit} type={type} addToFaves={() => { addNewsToFaves(hit.objectID) }} removeFromFaves={() => { removeNewsFromFaves(hit.objectID) }} />
                                 </div>
                             ))
                         )}

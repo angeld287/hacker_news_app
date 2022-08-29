@@ -1,14 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { IHitComponent } from '../../interfaces/components/IHits';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import './styles.css';
 import { timeSince } from '../../utils/tools';
+import { TabType } from '../../interfaces/components/ITab';
 
-const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url, created_at, addToFaves, removeFromFaves, isInMyFaves }) => {
+const NewsComponent: React.FC<IHitComponent> = ({ type, objectID, author, story_title, story_url, created_at, addToFaves, removeFromFaves, isInMyFaves }) => {
     const [time, setTime] = useState("")
+    const [fave, setFave] = useState<boolean>()
     useEffect(() => {
         setTime(timeSince(new Date(created_at)));
     }, [created_at])
+
+    useEffect(() => {
+        if (type === TabType.FAVORITE) {
+            setFave(true)
+        } else {
+            setFave(isInMyFaves);
+        }
+    }, [isInMyFaves, type])
+
+    const changeFave = useCallback((fave: boolean) => {
+        setFave(fave)
+        if (fave) {
+            addToFaves(objectID)
+        } else {
+            removeFromFaves(objectID)
+        }
+    }, [addToFaves, objectID, removeFromFaves]);
+
 
     return (
         <div className="news-component">
@@ -28,13 +48,13 @@ const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url
                 </a>
             </div>
             <div className="news-column actions">
-                {!isInMyFaves &&
-                    <button onClick={addToFaves}>
+                {!fave &&
+                    <button onClick={(e) => { e.preventDefault(); changeFave(true) }}>
                         <FavoriteBorder sx={{ color: 'red' }} />
                     </button>
                 }
-                {isInMyFaves &&
-                    <button onClick={removeFromFaves}>
+                {fave &&
+                    <button onClick={(e) => { e.preventDefault(); changeFave(false) }}>
                         <Favorite sx={{ color: 'red' }} />
                     </button>
                 }
