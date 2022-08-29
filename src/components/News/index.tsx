@@ -12,6 +12,9 @@ const News: React.FC<INews> = ({ type, hits }) => {
 
     return (
         <div className={`news-body ${search.status === 'pending' ? 'opacity' : 'none'}`}>
+            <div className="news-loading-image">
+                <img alt="" src="https://raw.githubusercontent.com/angeld287/hacker_news_app/ff35d2beeb522dd7474efd96abff8fb901bcb563/src/assets/Spinner-1s-200px.svg" />
+            </div>
             <div>
                 {type === TabType.ALL && <SelectComponent placeholder='Select your news' onChange={onChangeSelect} options={options} />}
             </div>
