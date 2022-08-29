@@ -62,11 +62,15 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
     }, [localSService, search, dispatch, type])
 
     const addNewsToFaves = useCallback((objectId: string) => {
-        if (search.results.hits) {
-            const hit = search.results.hits.find((hit => hit.objectID === objectId))
+        const apiHits = search.results.hits
+        if (apiHits) {
+            const hit = apiHits.find((hit => hit.objectID === objectId))
             if (hit)
-                if (localSService.addFave(hit))
+                if (localSService.addFave(hit)) {
                     dispatch(addLocalHit(hit))
+                    updateApiHitFave(hit, apiHits, true)
+                }
+
         }
     }, [search.results.hits, localSService, dispatch])
 
@@ -77,13 +81,13 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
             if (hit)
                 if (localSService.removeFave(hit)) {
                     dispatch(removeLocalHit(hit))
-                    updateApiHit(hit, apiHits)
+                    updateApiHitFave(hit, apiHits, false)
                 }
         }
     }, [search.results.hits, localSService, dispatch])
 
-    const updateApiHit = useCallback((hit: IHit, hits: Array<IHit>) => {
-        const modifiedHit: IHit = { ...hit, isInMyFaves: false }
+    const updateApiHitFave = useCallback((hit: IHit, hits: Array<IHit>, fave: boolean) => {
+        const modifiedHit: IHit = { ...hit, isInMyFaves: fave }
         const index = hits.findIndex(hit => hit.objectID === modifiedHit.objectID)
 
         const newList = [
