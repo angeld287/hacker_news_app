@@ -56,7 +56,7 @@ export const searchSlice = createSlice({
     },
     removeLocalHit: (state, action: PayloadAction<IHit>) => {
       const hitIndex = state.localHits.findIndex(hit => hit.objectID === action.payload.objectID)
-      state.localHits.slice(hitIndex, 1)
+      state.localHits.splice(hitIndex, 1)
     }
   },
 

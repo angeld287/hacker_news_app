@@ -40,7 +40,7 @@ class localStoreService implements ILocalStoreService {
             let results: Array<IHit> = this.getMyFavesHits();
             const hitIndex = results.findIndex(_hit => _hit.objectID === hit.objectID)
             if (hitIndex !== -1) {
-                results = results.slice(hitIndex, 1)
+                results.splice(hitIndex, 1)
                 localStorage.setItem(this.myFavsKey, JSON.stringify(results));
             }
             return true
