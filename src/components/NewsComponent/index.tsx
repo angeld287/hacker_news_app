@@ -13,7 +13,7 @@ const NewsComponent: React.FC<IHitComponent> = ({ author, story_title, story_url
     return (
         <div className="news-component">
             <div className="news-column column-body">
-                <a href={story_url} target="_blank" rel="noopener noreferrer">
+                <a href={story_url} target="_blank" className="a-tag" rel="noopener noreferrer">
                     <div className="time-row">
                         <div className="time-column clock-icon">
                             <div className="clock-icon">

@@ -8,10 +8,10 @@ import './styles.css';
 import useNews from './useNews';
 
 const News: React.FC<INews> = ({ type, hits }) => {
-    const { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves } = useNews(hits, type);
+    const { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves, search } = useNews(hits, type);
 
     return (
-        <div>
+        <div className={`news-body ${search.status === 'pending' ? 'opacity' : 'none'}`}>
             <div>
                 {type === TabType.ALL && <SelectComponent placeholder='Select your news' onChange={onChangeSelect} options={options} />}
             </div>

@@ -51,13 +51,14 @@ a {
     font-stretch: normal;
     font-style: normal;
     letter-spacing: 0.25px;
+    height: 100%;
 }
 
 .time-row {
     content: "";
     display: table;
     clear: both;
-    margin-top: 1.67rem;
+    padding-top: 1.67rem;
     margin-bottom: 0.375rem;
 }
 
@@ -76,4 +77,8 @@ a {
     line-height: normal;
     letter-spacing: normal;
     color: #767676;
+}
+
+.a-tag {
+    height: 100%
 }

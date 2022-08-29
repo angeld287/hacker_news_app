@@ -88,7 +88,7 @@ const useNews = (hits: Array<IHit> | undefined, type: TabType) => {
         }
     }, [search.results.hits, localSService, dispatch])
 
-    return { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves };
+    return { options, onChangePagination, current8Items, onChangeSelect, addNewsToFaves, removeNewsFromFaves, search };
 }
 
 export default useNews
