@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, RenderResult, act } from '../../utils/test-utils';
 import HackerNews from './index';
+import { Provider } from 'react-redux';
+import { store } from '../../app/store';
 
 let component: RenderResult;
 
@@ -11,7 +13,11 @@ describe('HackNews Unit Tests', () => {
       component.unmount()
 
     act(() => {
-      component = render(<HackerNews />)
+      component = render(
+        <Provider store={store}>
+          <HackerNews />
+        </Provider>
+      )
     });
   });
 
