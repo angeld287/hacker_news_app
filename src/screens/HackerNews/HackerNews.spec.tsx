@@ -34,8 +34,4 @@ describe('HackNews Unit Tests', () => {
     expect(component.getByText(/My faves/i)).toBeInTheDocument();
   });
 
-  test('It must display a select component for choose types of news', () => {
-    expect(component.getByText(/Select your news/i)).toBeInTheDocument();
-  });
-
 });
